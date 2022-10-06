@@ -1,0 +1,46 @@
+{
+  "Programmers": [
+    "Katherine Johnson",
+    "Mary Jackson",
+    "Dorothy Vaughn",
+    "Christine Darden",
+    "Patricia Cowings"
+  ],
+  "Testers": [
+    "Marie Curie",
+    "Ada Lovelace",
+    "Alice Ball"
+  ],
+  "ProgramsResources": [
+    "Localization.resources.dll"
+  ],
+  "IgnoredExtentions": [
+    ".txt",
+    ".doc",
+    ".docx",
+    ".pdf",
+    ".patch",
+    ".zip"
+  ],
+  "ParametersVersion": 1,
+  "PatchesDirectory": "C:\\Project\\patches\\{0}\\",
+  "ProgramsWithResourceFiles": [
+    "Localization.dll"
+  ],
+  "AllDependenciesPrograms": [
+    "Service.exe"
+  ],
+  "NoneDependenciesPrograms": [
+    "CommonFiles.exe"
+  ],
+  "MergeSaveFileName": "!MERGE_SAVE.patch",
+  "ProgramsIgnoreSignatureCopyright": [
+    "CommonFiles.exe"
+  ],
+  "NoneImpact": "This change can be applied with no impact to the system.",
+  "CheckpointImpact": "If you are currently running a service older than version {0}, applying this service will generate a checkpoint.",
+  "AllDependencies": "Ensure that all current patches are applied.",
+  "NoneDependencies": "None.",
+  "LogLevel": 0,
+  "Spellcheck": false
+}

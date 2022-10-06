@@ -1,0 +1,37 @@
+***************************************************
+Date: October 5/2022
+Programmer: Katherine Johnson
+Tester: Marie Curie
+Ticket #: 12345
+
+Background:
+An issue was found where some labels were not localized.
+
+Impact:
+This change can be applied with no impact to the system.
+
+Dependencies:
+Ensure that all current patches are applied.
+
+Description of Changes:
+Inventory, Parameters Editor, Program, Service - All labels have been localized.
+
+Localization - Additional locale strings were added.
+
+Instructions:
+1) Close all programs, including the service.
+2) Copy the Inventory.exe, Localization.dll, ParamsEditor.exe, Program.exe and Service.exe to the
+   Install directory.
+3) Copy the Localization.resources.dll to the Install/Resources directory.
+4) Restart the service.
+
+Programs Used:
+Inventory.exe, created 10/05/2022 5:24PM, size 2186KB, version 5.4.3.43
+Localization.dll, created 10/05/2022 5:25PM, size 1029KB, version 5.4.3.11
+Localization.resources.dll, created 10/05/2022 5:25PM, size 2818KB, version 5.4.3.11
+ParamsEditor.exe, created 10/05/2022 5:25PM, size 761KB, version 5.4.3.65
+Program.exe, created 10/05/2022 5:26PM, size 1984KB, version 5.4.3.83
+Service.exe, created 10/05/2022 5:24PM, size 6804KB, version 5.4.3.21
+
+***************************************************
++++

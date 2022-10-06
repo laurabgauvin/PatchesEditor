@@ -1,0 +1,685 @@
+﻿<Page
+    x:Class="PatchesEditor.Views.ParametersPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm="clr-namespace:PatchesEditor.ViewModels"
+    Title="Parameters Page"
+    d:DesignHeight="900"
+    d:DesignWidth="800"
+    Background="{DynamicResource MaterialDesignPaper}"
+    FontFamily="{DynamicResource MaterialDesignFont}"
+    TextElement.FontSize="16"
+    TextElement.FontWeight="Regular"
+    TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+    mc:Ignorable="d">
+    <Page.DataContext>
+        <vm:ParametersPageViewModel />
+    </Page.DataContext>
+
+    <Page.Resources>
+        <!--#region Local styles-->
+        <Style
+            x:Key="ColourZoneTitle"
+            BasedOn="{StaticResource ColourZoneTitle}"
+            TargetType="materialDesign:ColorZone">
+            <Setter Property="Grid.Row" Value="0" />
+        </Style>
+
+        <Style
+            x:Key="AddValueButton"
+            BasedOn="{StaticResource AddValueButton}"
+            TargetType="Button">
+            <Setter Property="Grid.Column" Value="1" />
+            <Setter Property="Command" Value="{Binding AddValue}" />
+        </Style>
+
+        <Style
+            x:Key="DeleteValueButton"
+            BasedOn="{StaticResource DeleteValueButton}"
+            TargetType="Button">
+            <Setter Property="Grid.Column" Value="1" />
+            <Setter Property="CommandParameter" Value="{Binding}" />
+        </Style>
+
+        <Style
+            x:Key="ParameterBoxTitle"
+            BasedOn="{StaticResource ParameterBoxTitle}"
+            TargetType="TextBlock">
+            <Setter Property="Grid.Column" Value="0" />
+        </Style>
+
+        <Style
+            x:Key="ParameterListItem"
+            BasedOn="{StaticResource ParameterListItem}"
+            TargetType="TextBlock">
+            <Setter Property="Grid.Column" Value="0" />
+        </Style>
+
+        <Style
+            x:Key="TextParamName"
+            BasedOn="{StaticResource TextParamName}"
+            TargetType="TextBlock">
+            <Setter Property="Grid.Column" Value="0" />
+        </Style>
+
+        <Style
+            x:Key="TextParamValue"
+            BasedOn="{StaticResource TextParamValue}"
+            TargetType="TextBox">
+            <Setter Property="Grid.Column" Value="1" />
+        </Style>
+
+        <Style
+            x:Key="TextParamCombo"
+            BasedOn="{StaticResource TextParamCombo}"
+            TargetType="ComboBox">
+            <Setter Property="Grid.Column" Value="1" />
+        </Style>
+        <!--#endregion-->
+    </Page.Resources>
+
+    <Grid Name="mainGrid">
+        <materialDesign:DialogHost Identifier="RootDialog">
+            <TabControl materialDesign:ColorZoneAssist.Mode="Dark" Style="{StaticResource MaterialDesignNavigatilRailTabControl}">
+
+                <!--#region General Parameters-->
+                <TabItem Header="General">
+                    <Grid Margin="5">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+
+                        <!--#region Text Params-->
+                        <Border
+                            Grid.Row="0"
+                            Grid.Column="0"
+                            Style="{StaticResource ParameterBoxBorder}">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="auto" />
+                                    <RowDefinition Height="auto" />
+                                    <RowDefinition Height="auto" />
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="auto" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+
+                                <!--#region Log Level-->
+                                <TextBlock
+                                    Grid.Row="0"
+                                    Style="{StaticResource TextParamName}"
+                                    Text="Log Level" />
+                                <ComboBox
+                                    Grid.Row="0"
+                                    ItemsSource="{Binding Source={StaticResource LogLevelStringConverter}, Path=Values}"
+                                    SelectedItem="{Binding CurrentParameters.LogLevel, Converter={StaticResource LogLevelStringConverter}, Mode=TwoWay}"
+                                    Style="{StaticResource TextParamCombo}" />
+                                <!--#endregion-->
+
+                                <!--#region Merge Save File-->
+                                <TextBlock
+                                    Grid.Row="1"
+                                    Style="{StaticResource TextParamName}"
+                                    Text="Name Merge Save" />
+                                <TextBox
+                                    Grid.Row="1"
+                                    Style="{StaticResource TextParamValue}"
+                                    Text="{Binding CurrentParameters.MergeSaveFileName}" />
+                                <!--#endregion-->
+
+                                <!--#region Spellcheck-->
+                                <TextBlock
+                                    Grid.Row="2"
+                                    Style="{StaticResource TextParamName}"
+                                    Text="Spellcheck" />
+                                <ComboBox
+                                    Grid.Row="2"
+                                    SelectedIndex="0"
+                                    Style="{StaticResource TextParamCombo}">
+                                    <ComboBoxItem Content="No" />
+                                    <ComboBoxItem Content="Yes" IsSelected="{Binding CurrentParameters.Spellcheck}" />
+                                </ComboBox>
+                                <!--#endregion-->
+
+                            </Grid>
+                        </Border>
+                        <!--#endregion-->
+
+                        <!--#region Programmers-->
+                        <Border
+                            Grid.Row="0"
+                            Grid.Column="1"
+                            Style="{StaticResource ParameterBoxBorder}">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="auto" />
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+                                <materialDesign:ColorZone Style="{StaticResource ColourZoneTitle}">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="auto" />
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Style="{StaticResource ParameterBoxTitle}" Text="Programmers" />
+                                        <Button
+                                            CommandParameter="Programmer"
+                                            Content="{materialDesign:PackIcon Kind=Plus,
+                                                                              Size=22}"
+                                            Style="{StaticResource AddValueButton}" />
+                                    </Grid>
+                                </materialDesign:ColorZone>
+                                <ScrollViewer Grid.Row="1">
+                                    <ItemsControl ItemsSource="{Binding CurrentParameters.Programmers}">
+                                        <ItemsControl.ItemTemplate>
+                                            <DataTemplate>
+                                                <Border Style="{StaticResource ParameterListDivider}">
+                                                    <Grid>
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition Width="*" />
+                                                            <ColumnDefinition Width="auto" />
+                                                        </Grid.ColumnDefinitions>
+                                                        <TextBlock Style="{StaticResource ParameterListItem}" Text="{Binding}" />
+                                                        <Button
+                                                            Command="{Binding ElementName=mainGrid, Path=DataContext.DeleteProgrammer}"
+                                                            Content="{materialDesign:PackIcon Kind=GarbageCan,
+                                                                                              Size=22}"
+                                                            Style="{StaticResource DeleteValueButton}" />
+                                                    </Grid>
+                                                </Border>
+                                            </DataTemplate>
+                                        </ItemsControl.ItemTemplate>
+                                    </ItemsControl>
+                                </ScrollViewer>
+                            </Grid>
+                        </Border>
+                        <!--#endregion-->
+
+                        <!--#region Testers-->
+                        <Border
+                            Grid.Row="1"
+                            Grid.Column="0"
+                            Style="{StaticResource ParameterBoxBorder}">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="auto" />
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+                                <materialDesign:ColorZone Style="{StaticResource ColourZoneTitle}">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="auto" />
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Style="{StaticResource ParameterBoxTitle}" Text="Testers" />
+                                        <Button
+                                            CommandParameter="Tester"
+                                            Content="{materialDesign:PackIcon Kind=Plus,
+                                                                              Size=22}"
+                                            Style="{StaticResource AddValueButton}" />
+                                    </Grid>
+                                </materialDesign:ColorZone>
+                                <ScrollViewer Grid.Row="1">
+                                    <ItemsControl ItemsSource="{Binding CurrentParameters.Testers}">
+                                        <ItemsControl.ItemTemplate>
+                                            <DataTemplate>
+                                                <Border Style="{StaticResource ParameterListDivider}">
+                                                    <Grid>
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition Width="*" />
+                                                            <ColumnDefinition Width="auto" />
+                                                        </Grid.ColumnDefinitions>
+                                                        <TextBlock Style="{StaticResource ParameterListItem}" Text="{Binding}" />
+                                                        <Button
+                                                            Command="{Binding ElementName=mainGrid, Path=DataContext.DeleteTester}"
+                                                            Content="{materialDesign:PackIcon Kind=GarbageCan,
+                                                                                              Size=22}"
+                                                            Style="{StaticResource DeleteValueButton}" />
+                                                    </Grid>
+                                                </Border>
+                                            </DataTemplate>
+                                        </ItemsControl.ItemTemplate>
+                                    </ItemsControl>
+                                </ScrollViewer>
+                            </Grid>
+                        </Border>
+                        <!--#endregion-->
+
+                        <!--#region Ignored Extensions-->
+                        <Border
+                            Grid.Row="1"
+                            Grid.Column="1"
+                            Style="{StaticResource ParameterBoxBorder}">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="auto" />
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+                                <materialDesign:ColorZone Style="{StaticResource ColourZoneTitle}">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="auto" />
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Style="{StaticResource ParameterBoxTitle}" Text="Ignored Extensions" />
+                                        <Button
+                                            CommandParameter="Extension"
+                                            Content="{materialDesign:PackIcon Kind=Plus,
+                                                                              Size=22}"
+                                            Style="{StaticResource AddValueButton}" />
+                                    </Grid>
+                                </materialDesign:ColorZone>
+                                <ScrollViewer Grid.Row="1">
+                                    <ItemsControl ItemsSource="{Binding CurrentParameters.IgnoredExtentions}">
+                                        <ItemsControl.ItemTemplate>
+                                            <DataTemplate>
+                                                <Border Style="{StaticResource ParameterListDivider}">
+                                                    <Grid>
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition Width="*" />
+                                                            <ColumnDefinition Width="auto" />
+                                                        </Grid.ColumnDefinitions>
+                                                        <TextBlock Style="{StaticResource ParameterListItem}" Text="{Binding}" />
+                                                        <Button
+                                                            Command="{Binding ElementName=mainGrid, Path=DataContext.DeleteIgnoredExtensions}"
+                                                            Content="{materialDesign:PackIcon Kind=GarbageCan,
+                                                                                              Size=22}"
+                                                            Style="{StaticResource DeleteValueButton}" />
+                                                    </Grid>
+                                                </Border>
+                                            </DataTemplate>
+                                        </ItemsControl.ItemTemplate>
+                                    </ItemsControl>
+                                </ScrollViewer>
+                            </Grid>
+                        </Border>
+                        <!--#endregion-->
+
+                        <!--#region Ignore Copyright-->
+                        <Border
+                            Grid.Row="2"
+                            Grid.Column="0"
+                            Style="{StaticResource ParameterBoxBorder}">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="auto" />
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+                                <materialDesign:ColorZone Style="{StaticResource ColourZoneTitle}">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="auto" />
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Style="{StaticResource ParameterBoxTitle}" Text="Ignore Copyright Check" />
+                                        <Button
+                                            CommandParameter="Ignore Copyright"
+                                            Content="{materialDesign:PackIcon Kind=Plus,
+                                                                              Size=22}"
+                                            Style="{StaticResource AddValueButton}" />
+                                    </Grid>
+                                </materialDesign:ColorZone>
+                                <ScrollViewer Grid.Row="1">
+                                    <ItemsControl ItemsSource="{Binding CurrentParameters.ProgramsIgnoreSignatureCopyright}">
+                                        <ItemsControl.ItemTemplate>
+                                            <DataTemplate>
+                                                <Border Style="{StaticResource ParameterListDivider}">
+                                                    <Grid>
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition Width="*" />
+                                                            <ColumnDefinition Width="auto" />
+                                                        </Grid.ColumnDefinitions>
+                                                        <TextBlock Style="{StaticResource ParameterListItem}" Text="{Binding}" />
+                                                        <Button
+                                                            Command="{Binding ElementName=mainGrid, Path=DataContext.DeleteIgnoreCopyright}"
+                                                            Content="{materialDesign:PackIcon Kind=GarbageCan,
+                                                                                              Size=22}"
+                                                            Style="{StaticResource DeleteValueButton}" />
+                                                    </Grid>
+                                                </Border>
+                                            </DataTemplate>
+                                        </ItemsControl.ItemTemplate>
+                                    </ItemsControl>
+                                </ScrollViewer>
+                            </Grid>
+                        </Border>
+                        <!--#endregion-->
+
+                    </Grid>
+                </TabItem>
+                <!--#endregion-->
+
+                <!--#region Project Parameters-->
+                <TabItem Header="Project">
+                    <Grid Margin="5">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+
+                        <!--#region Text Params-->
+                        <Border
+                            Grid.Row="0"
+                            Grid.Column="0"
+                            Grid.ColumnSpan="2"
+                            Style="{StaticResource ParameterBoxBorder}">
+                            <ScrollViewer>
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="auto" />
+                                        <RowDefinition Height="auto" />
+                                        <RowDefinition Height="auto" />
+                                        <RowDefinition Height="auto" />
+                                        <RowDefinition Height="auto" />
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="auto" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+
+                                    <!--#region Patch Folder-->
+                                    <TextBlock
+                                        Grid.Row="0"
+                                        Style="{StaticResource TextParamName}"
+                                        Text="Patch Folder" />
+                                    <TextBox
+                                        Grid.Row="0"
+                                        Style="{StaticResource TextParamValue}"
+                                        Text="{Binding CurrentParameters.PatchesDirectory}" />
+                                    <!--#endregion-->
+
+                                    <!--#region None Impact-->
+                                    <TextBlock
+                                        Grid.Row="1"
+                                        Style="{StaticResource TextParamName}"
+                                        Text="None Impact" />
+                                    <TextBox
+                                        Grid.Row="1"
+                                        Style="{StaticResource TextParamValue}"
+                                        Text="{Binding CurrentParameters.NoneImpact}" />
+                                    <!--#endregion-->
+
+                                    <!--#region Checkpoint Impact-->
+                                    <TextBlock
+                                        Grid.Row="2"
+                                        Style="{StaticResource TextParamName}"
+                                        Text="Cp Impact" />
+                                    <TextBox
+                                        Grid.Row="2"
+                                        Style="{StaticResource TextParamValue}"
+                                        Text="{Binding CurrentParameters.CheckpointImpact}" />
+                                    <!--#endregion-->
+
+                                    <!--#region All Dependencies-->
+                                    <TextBlock
+                                        Grid.Row="3"
+                                        Style="{StaticResource TextParamName}"
+                                        Text="All Dependencies" />
+                                    <TextBox
+                                        Grid.Row="3"
+                                        Style="{StaticResource TextParamValue}"
+                                        Text="{Binding CurrentParameters.AllDependencies}" />
+                                    <!--#endregion-->
+
+                                    <!--#region None Dependencies-->
+                                    <TextBlock
+                                        Grid.Row="4"
+                                        Style="{StaticResource TextParamName}"
+                                        Text="No Dependencies" />
+                                    <TextBox
+                                        Grid.Row="4"
+                                        Style="{StaticResource TextParamValue}"
+                                        Text="{Binding CurrentParameters.NoneDependencies}" />
+                                    <!--#endregion-->
+
+                                </Grid>
+                            </ScrollViewer>
+                        </Border>
+                        <!--#endregion-->
+
+                        <!--#region Resources Directory-->
+                        <Border
+                            Grid.Row="0"
+                            Grid.Column="2"
+                            Style="{StaticResource ParameterBoxBorder}">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="auto" />
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+                                <materialDesign:ColorZone Style="{StaticResource ColourZoneTitle}">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="auto" />
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Style="{StaticResource ParameterBoxTitle}" Text="Programs Resources Directory" />
+                                        <Button
+                                            CommandParameter="Resources Directory"
+                                            Content="{materialDesign:PackIcon Kind=Plus,
+                                                                              Size=22}"
+                                            Style="{StaticResource AddValueButton}" />
+                                    </Grid>
+                                </materialDesign:ColorZone>
+                                <ScrollViewer Grid.Row="1">
+                                    <ItemsControl ItemsSource="{Binding CurrentParameters.ProgramsResources}">
+                                        <ItemsControl.ItemTemplate>
+                                            <DataTemplate>
+                                                <Border Style="{StaticResource ParameterListDivider}">
+                                                    <Grid>
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition Width="*" />
+                                                            <ColumnDefinition Width="auto" />
+                                                        </Grid.ColumnDefinitions>
+                                                        <TextBlock Style="{StaticResource ParameterListItem}" Text="{Binding}" />
+                                                        <Button
+                                                            Command="{Binding ElementName=mainGrid, Path=DataContext.DeleteResourcesDir}"
+                                                            Content="{materialDesign:PackIcon Kind=GarbageCan,
+                                                                                              Size=22}"
+                                                            Style="{StaticResource DeleteValueButton}" />
+                                                    </Grid>
+                                                </Border>
+                                            </DataTemplate>
+                                        </ItemsControl.ItemTemplate>
+                                    </ItemsControl>
+                                </ScrollViewer>
+                            </Grid>
+                        </Border>
+                        <!--#endregion-->
+
+                        <!--#region Programs With Resources-->
+                        <Border
+                            Grid.Row="1"
+                            Grid.Column="0"
+                            Style="{StaticResource ParameterBoxBorder}">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="auto" />
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+                                <materialDesign:ColorZone Style="{StaticResource ColourZoneTitle}">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="auto" />
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Style="{StaticResource ParameterBoxTitle}" Text="Programs With Resources" />
+                                        <Button
+                                            CommandParameter="Prog w/ Resources"
+                                            Content="{materialDesign:PackIcon Kind=Plus,
+                                                                              Size=22}"
+                                            Style="{StaticResource AddValueButton}" />
+                                    </Grid>
+                                </materialDesign:ColorZone>
+                                <ScrollViewer Grid.Row="1">
+                                    <ItemsControl ItemsSource="{Binding CurrentParameters.ProgramsWithResourceFiles}">
+                                        <ItemsControl.ItemTemplate>
+                                            <DataTemplate>
+                                                <Border Style="{StaticResource ParameterListDivider}">
+                                                    <Grid>
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition Width="*" />
+                                                            <ColumnDefinition Width="auto" />
+                                                        </Grid.ColumnDefinitions>
+                                                        <TextBlock Style="{StaticResource ParameterListItem}" Text="{Binding}" />
+                                                        <Button
+                                                            Command="{Binding ElementName=mainGrid, Path=DataContext.DeleteProgramWithResources}"
+                                                            Content="{materialDesign:PackIcon Kind=GarbageCan,
+                                                                                              Size=22}"
+                                                            Style="{StaticResource DeleteValueButton}" />
+                                                    </Grid>
+                                                </Border>
+                                            </DataTemplate>
+                                        </ItemsControl.ItemTemplate>
+                                    </ItemsControl>
+                                </ScrollViewer>
+                            </Grid>
+                        </Border>
+                        <!--#endregion-->
+
+                        <!--#region All Dependencies-->
+                        <Border
+                            Grid.Row="1"
+                            Grid.Column="1"
+                            Style="{StaticResource ParameterBoxBorder}">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="auto" />
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+                                <materialDesign:ColorZone Style="{StaticResource ColourZoneTitle}">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="auto" />
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Style="{StaticResource ParameterBoxTitle}" Text="Programs With All Dependencies" />
+                                        <Button
+                                            CommandParameter="All Dependencies"
+                                            Content="{materialDesign:PackIcon Kind=Plus,
+                                                                              Size=22}"
+                                            Style="{StaticResource AddValueButton}" />
+                                    </Grid>
+                                </materialDesign:ColorZone>
+                                <ScrollViewer Grid.Row="1">
+                                    <ItemsControl ItemsSource="{Binding CurrentParameters.AllDependenciesPrograms}">
+                                        <ItemsControl.ItemTemplate>
+                                            <DataTemplate>
+                                                <Border Style="{StaticResource ParameterListDivider}">
+                                                    <Grid>
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition Width="*" />
+                                                            <ColumnDefinition Width="auto" />
+                                                        </Grid.ColumnDefinitions>
+                                                        <TextBlock Style="{StaticResource ParameterListItem}" Text="{Binding}" />
+                                                        <Button
+                                                            Command="{Binding ElementName=mainGrid, Path=DataContext.DeleteAllDependencies}"
+                                                            Content="{materialDesign:PackIcon Kind=GarbageCan,
+                                                                                              Size=22}"
+                                                            Style="{StaticResource DeleteValueButton}" />
+                                                    </Grid>
+                                                </Border>
+                                            </DataTemplate>
+                                        </ItemsControl.ItemTemplate>
+                                    </ItemsControl>
+                                </ScrollViewer>
+                            </Grid>
+                        </Border>
+                        <!--#endregion-->
+
+                        <!--#region None Dependencies-->
+                        <Border
+                            Grid.Row="1"
+                            Grid.Column="2"
+                            Style="{StaticResource ParameterBoxBorder}">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="auto" />
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+                                <materialDesign:ColorZone Style="{StaticResource ColourZoneTitle}">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="auto" />
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Style="{StaticResource ParameterBoxTitle}" Text="Programs With No Dependencies" />
+                                        <Button
+                                            CommandParameter="None Dependencies"
+                                            Content="{materialDesign:PackIcon Kind=Plus,
+                                                                              Size=22}"
+                                            Style="{StaticResource AddValueButton}" />
+                                    </Grid>
+                                </materialDesign:ColorZone>
+                                <ScrollViewer Grid.Row="1">
+                                    <ItemsControl ItemsSource="{Binding CurrentParameters.NoneDependenciesPrograms}">
+                                        <ItemsControl.ItemTemplate>
+                                            <DataTemplate>
+                                                <Border Style="{StaticResource ParameterListDivider}">
+                                                    <Grid>
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition Width="*" />
+                                                            <ColumnDefinition Width="auto" />
+                                                        </Grid.ColumnDefinitions>
+                                                        <TextBlock Style="{StaticResource ParameterListItem}" Text="{Binding}" />
+                                                        <Button
+                                                            Command="{Binding ElementName=mainGrid, Path=DataContext.DeleteNoneDependencies}"
+                                                            Content="{materialDesign:PackIcon Kind=GarbageCan,
+                                                                                              Size=22}"
+                                                            Style="{StaticResource DeleteValueButton}" />
+                                                    </Grid>
+                                                </Border>
+                                            </DataTemplate>
+                                        </ItemsControl.ItemTemplate>
+                                    </ItemsControl>
+                                </ScrollViewer>
+                            </Grid>
+                        </Border>
+                        <!--#endregion-->
+
+                    </Grid>
+                </TabItem>
+                <!--#endregion-->
+
+            </TabControl>
+        </materialDesign:DialogHost>
+
+        <!--#region Save/Cancel Buttons-->
+        <StackPanel
+            Grid.Row="0"
+            Grid.Column="0"
+            Margin="10,10,10,5"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Bottom"
+            Background="{DynamicResource MaterialDesignPaper}"
+            Orientation="Horizontal">
+            <Button
+                Margin="0,0,10,0"
+                Command="{Binding Save}"
+                Content="Save"
+                Style="{DynamicResource MaterialDesignRaisedButton}" />
+            <Button
+                Command="{Binding Cancel}"
+                Content="Cancel"
+                Style="{DynamicResource MaterialDesignRaisedButton}" />
+        </StackPanel>
+        <!--#endregion-->
+
+    </Grid>
+</Page>

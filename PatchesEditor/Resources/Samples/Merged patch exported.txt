@@ -1,0 +1,56 @@
+***************************************************
+Date: October 5/2022
+Programmer: Katherine Johnson, Mary Jackson, Christine Darden
+Tester: Marie Curie, Ada Lovelace
+Ticket #: 12345, 58475
+
+Background (Localization Fixes):
+An issue was found where some labels were not localized.
+
+Background (New Parameter):
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean convallis justo bibendum, rutrum dui
+quis, commodo nisi. Mauris aliquet mi et ex tristique, ut sodales libero pulvinar. Sed leo nunc,
+convallis ut ultricies vitae, tempor vitae diam. Donec dignissim luctus sem, sed consequat sem
+rutrum ut. Cras lacinia, urna ac feugiat scelerisque, enim massa accumsan risus, et blandit magna
+magna id nisi. In pretium dui in nisl rhoncus suscipit.
+
+Impact:
+This change can be applied with no impact to the system.
+
+Dependencies:
+Ensure that all current patches are applied.
+
+Description of Changes (Localization Fixes):
+Inventory, Parameters Editor, Program, Service - All labels have been localized.
+
+Localization - Additional locale strings were added.
+
+Description of Changes (New Parameter):
+Parameter Editor, Localization - Sed vitae risus vitae turpis facilisis aliquam. Fusce ac justo nec
+justo fermentum sollicitudin a vitae metus. Pellentesque iaculis at felis vitae cursus. Sed a
+egestas dui, ac laoreet diam. Morbi aliquam tincidunt libero et molestie. Etiam dignissim urna non
+luctus molestie. Nullam vitae efficitur augue, id venenatis augue. Morbi sed felis consectetur,
+viverra orci non, consectetur ipsum. Aenean semper neque mauris, eu placerat lectus lacinia vitae:
+- Nulla nec enim varius, sodales nunc sit amet, ultrices neque. In vitae orci tristique, congue urna
+  sed, luctus est. Sed blandit sollicitudin bibendum. Sed urna dui, finibus ac quam eu, consequat
+  convallis ligula.
+- Mauris ac neque tristique ante tempus tincidunt a non tortor. Vivamus sit amet justo accumsan,
+  finibus tellus ut, facilisis est.
+
+Instructions:
+1) Close all programs, including the service.
+2) Copy the Inventory.exe, Localization.dll, ParamsEditor.exe, Program.exe and Service.exe to the
+   Install directory.
+3) Copy the Localization.resources.dll to the Install/Resources directory.
+4) Restart the service.
+
+Programs Used:
+Inventory.exe, created 10/05/2022 5:24PM, size 2186KB, version 5.4.3.43
+Localization.dll, created 10/05/2022 5:25PM, size 1029KB, version 5.4.3.11
+Localization.resources.dll, created 10/05/2022 5:25PM, size 2818KB, version 5.4.3.11
+ParamsEditor.exe, created 10/05/2022 5:25PM, size 761KB, version 5.4.3.65
+Program.exe, created 10/05/2022 5:26PM, size 1984KB, version 5.4.3.83
+Service.exe, created 10/05/2022 5:24PM, size 6804KB, version 5.4.3.21
+
+***************************************************
++++

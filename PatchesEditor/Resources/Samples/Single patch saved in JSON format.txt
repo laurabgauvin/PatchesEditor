@@ -1,0 +1,259 @@
+[
+  {
+    "PatchDate": "2022-10-05T00:00:00-06:00",
+    "Programmers": [
+      "Katherine Johnson"
+    ],
+    "Testers": [
+      "Marie Curie"
+    ],
+    "Ticket": "12345",
+    "ReferenceType": 0,
+    "ReferenceNumber": "",
+    "ShortDescription": "Localization Fixes",
+    "Background": "An issue was found where some labels were not localized.",
+    "Impact": {
+      "ServiceDoesCheckpoint": false,
+      "HasService": true,
+      "AllImpact": "",
+      "ServiceImpact": ""
+    },
+    "AllDependencies": "",
+    "Dependencies": [
+      {
+        "ProgramName": "Inventory.exe",
+        "Type": 2,
+        "Text": "None.",
+        "ProgramDependencies": [
+          {
+            "ProgramName": "Localization.dll",
+            "Status": 2,
+            "Version": "5.4.3.11"
+          },
+          {
+            "ProgramName": "Localization.resources.dll",
+            "Status": 2,
+            "Version": "5.4.3.11"
+          },
+          {
+            "ProgramName": "ParamsEditor.exe",
+            "Status": 2,
+            "Version": "5.4.3.65"
+          },
+          {
+            "ProgramName": "Program.exe",
+            "Status": 2,
+            "Version": "5.4.3.83"
+          },
+          {
+            "ProgramName": "Service.exe",
+            "Status": 2,
+            "Version": "5.4.3.21"
+          }
+        ]
+      },
+      {
+        "ProgramName": "Localization.dll",
+        "Type": 0,
+        "Text": "Ensure that all current patches are applied.",
+        "ProgramDependencies": [
+          {
+            "ProgramName": "Inventory.exe",
+            "Status": 2,
+            "Version": "5.4.3.43"
+          },
+          {
+            "ProgramName": "Localization.resources.dll",
+            "Status": 2,
+            "Version": "5.4.3.11"
+          },
+          {
+            "ProgramName": "ParamsEditor.exe",
+            "Status": 2,
+            "Version": "5.4.3.65"
+          },
+          {
+            "ProgramName": "Program.exe",
+            "Status": 2,
+            "Version": "5.4.3.83"
+          },
+          {
+            "ProgramName": "Service.exe",
+            "Status": 2,
+            "Version": "5.4.3.21"
+          }
+        ]
+      },
+      {
+        "ProgramName": "Localization.resources.dll",
+        "Type": 1,
+        "Text": "Requires Localization.dll version 5.4.3.11 or later.",
+        "ProgramDependencies": [
+          {
+            "ProgramName": "Inventory.exe",
+            "Status": 2,
+            "Version": "5.4.3.43"
+          },
+          {
+            "ProgramName": "Localization.dll",
+            "Status": 0,
+            "Version": "5.4.3.11"
+          },
+          {
+            "ProgramName": "ParamsEditor.exe",
+            "Status": 2,
+            "Version": "5.4.3.65"
+          },
+          {
+            "ProgramName": "Program.exe",
+            "Status": 2,
+            "Version": "5.4.3.83"
+          },
+          {
+            "ProgramName": "Service.exe",
+            "Status": 2,
+            "Version": "5.4.3.21"
+          }
+        ]
+      },
+      {
+        "ProgramName": "ParamsEditor.exe",
+        "Type": 1,
+        "Text": "Requires Localization.dll version 5.4.3.11 or later.\r\n\r\nRequires Service.exe version 5.4.3.21 or later as the result of a previous patch.",
+        "ProgramDependencies": [
+          {
+            "ProgramName": "Inventory.exe",
+            "Status": 2,
+            "Version": "5.4.3.43"
+          },
+          {
+            "ProgramName": "Localization.dll",
+            "Status": 0,
+            "Version": "5.4.3.11"
+          },
+          {
+            "ProgramName": "Localization.resources.dll",
+            "Status": 2,
+            "Version": "5.4.3.11"
+          },
+          {
+            "ProgramName": "Program.exe",
+            "Status": 2,
+            "Version": "5.4.3.83"
+          },
+          {
+            "ProgramName": "Service.exe",
+            "Status": 1,
+            "Version": "5.4.3.21"
+          }
+        ]
+      },
+      {
+        "ProgramName": "Program.exe",
+        "Type": 1,
+        "Text": "Requires Localization.dll version 5.4.3.11 or later.",
+        "ProgramDependencies": [
+          {
+            "ProgramName": "Inventory.exe",
+            "Status": 2,
+            "Version": "5.4.3.43"
+          },
+          {
+            "ProgramName": "Localization.dll",
+            "Status": 0,
+            "Version": "5.4.3.11"
+          },
+          {
+            "ProgramName": "Localization.resources.dll",
+            "Status": 2,
+            "Version": "5.4.3.11"
+          },
+          {
+            "ProgramName": "ParamsEditor.exe",
+            "Status": 2,
+            "Version": "5.4.3.65"
+          },
+          {
+            "ProgramName": "Service.exe",
+            "Status": 2,
+            "Version": "5.4.3.21"
+          }
+        ]
+      },
+      {
+        "ProgramName": "Service.exe",
+        "Type": 0,
+        "Text": "Ensure that all current patches are applied.",
+        "ProgramDependencies": [
+          {
+            "ProgramName": "Inventory.exe",
+            "Status": 2,
+            "Version": "5.4.3.43"
+          },
+          {
+            "ProgramName": "Localization.dll",
+            "Status": 2,
+            "Version": "5.4.3.11"
+          },
+          {
+            "ProgramName": "Localization.resources.dll",
+            "Status": 2,
+            "Version": "5.4.3.11"
+          },
+          {
+            "ProgramName": "ParamsEditor.exe",
+            "Status": 2,
+            "Version": "5.4.3.65"
+          },
+          {
+            "ProgramName": "Program.exe",
+            "Status": 2,
+            "Version": "5.4.3.83"
+          }
+        ]
+      }
+    ],
+    "DescriptionOfChanges": "Inventory, Parameters Editor, Program, Service - All labels have been localized.\r\n\r\nLocalization - Additional locale strings were added.",
+    "Instructions": "1) Close all programs, including the service.\r\n2) Copy the Inventory.exe, Localization.dll, ParamsEditor.exe, Program.exe and Service.exe to the Install directory.\r\n3) Copy the Localization.resources.dll to the Install/Resources directory.\r\n4) Restart the service.",
+    "NeedsCommonFiles": true,
+    "NeedsSqlScripts": false,
+    "ProgramsUsed": [
+      {
+        "ProgramName": "Inventory.exe",
+        "VersionString": "5.4.3.43",
+        "CreatedDate": "2022-10-05T17:24:52.7399053-06:00",
+        "Size": 2186
+      },
+      {
+        "ProgramName": "Localization.dll",
+        "VersionString": "5.4.3.11",
+        "CreatedDate": "2022-10-05T17:25:11.2154019-06:00",
+        "Size": 1029
+      },
+      {
+        "ProgramName": "Localization.resources.dll",
+        "VersionString": "5.4.3.11",
+        "CreatedDate": "2022-10-05T17:25:24.017726-06:00",
+        "Size": 2818
+      },
+      {
+        "ProgramName": "ParamsEditor.exe",
+        "VersionString": "5.4.3.65",
+        "CreatedDate": "2022-10-05T17:25:53.8880247-06:00",
+        "Size": 761
+      },
+      {
+        "ProgramName": "Program.exe",
+        "VersionString": "5.4.3.83",
+        "CreatedDate": "2022-10-05T17:26:11.6604279-06:00",
+        "Size": 1984
+      },
+      {
+        "ProgramName": "Service.exe",
+        "VersionString": "5.4.3.21",
+        "CreatedDate": "2022-10-05T17:24:28.9510517-06:00",
+        "Size": 6804
+      }
+    ]
+  }
+]

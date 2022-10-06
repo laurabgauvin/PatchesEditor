@@ -1,0 +1,150 @@
+﻿<Window
+    x:Class="PatchesEditor.Views.UserStringSelectionWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm="clr-namespace:PatchesEditor.ViewModels"
+    Title="{Binding WindowTitle}"
+    Width="800"
+    Height="400"
+    d:DataContext="{d:DesignInstance Type=vm:UserStringSelectionWindowViewModel}"
+    materialDesign:ThemeAssist.Theme="Inherit"
+    Background="{DynamicResource MaterialDesignPaper}"
+    FontFamily="{DynamicResource MaterialDesignFont}"
+    ResizeMode="NoResize"
+    TextElement.FontSize="16"
+    TextElement.FontWeight="Regular"
+    TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+    WindowStartupLocation="CenterScreen"
+    WindowState="Normal"
+    WindowStyle="None"
+    mc:Ignorable="d">
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="10" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="10" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="10" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="10" />
+            </Grid.RowDefinitions>
+
+            <TextBlock
+                Grid.Row="1"
+                Grid.Column="1"
+                Margin="0,0,0,10"
+                FontSize="20"
+                Text="{Binding WindowTitle}"
+                TextAlignment="Center"
+                TextWrapping="Wrap" />
+
+            <!--#region New value dialog-->
+            <materialDesign:DialogHost
+                x:Name="userStringSelectionDialogHost"
+                Grid.Row="2"
+                Grid.Column="1"
+                Margin="0,0,0,10"
+                DialogClosing="userStringSelectionDialogHost_DialogClosing">
+                <materialDesign:DialogHost.DialogContent>
+                    <StackPanel Margin="16">
+                        <TextBlock Text="Add a new value" />
+                        <TextBox
+                            x:Name="newStringTextBox"
+                            MinWidth="400"
+                            MaxWidth="500"
+                            Margin="0,8,0,0"
+                            HorizontalAlignment="Stretch"
+                            TextWrapping="Wrap" />
+                        <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
+                            <Button
+                                Margin="0,8,8,0"
+                                Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}"
+                                Content="CANCEL"
+                                IsCancel="True"
+                                Style="{StaticResource MaterialDesignFlatButton}">
+                                <Button.CommandParameter>
+                                    <system:Boolean xmlns:system="clr-namespace:System;assembly=mscorlib">
+                                        False
+                                    </system:Boolean>
+                                </Button.CommandParameter>
+                            </Button>
+                            <Button
+                                Margin="0,8,8,0"
+                                Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}"
+                                Content="ADD"
+                                IsDefault="True"
+                                Style="{StaticResource MaterialDesignFlatButton}">
+                                <Button.CommandParameter>
+                                    <system:Boolean xmlns:system="clr-namespace:System;assembly=mscorlib">
+                                        True
+                                    </system:Boolean>
+                                </Button.CommandParameter>
+                            </Button>
+                        </StackPanel>
+                    </StackPanel>
+                </materialDesign:DialogHost.DialogContent>
+                <!--#endregion-->
+
+                <!--#region Value Select-->
+                <GroupBox Header="{Binding GroupBoxTitle}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <ListView
+                            Grid.Row="0"
+                            Grid.Column="0"
+                            ItemsSource="{Binding AllStrings}"
+                            SelectedItem="{Binding SelectedString}"
+                            SelectionMode="Single">
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock
+                                        MaxWidth="710"
+                                        FontSize="16"
+                                        Text="{Binding}"
+                                        TextWrapping="Wrap" />
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                        <Button
+                            x:Name="addValueButton"
+                            Grid.Row="1"
+                            Grid.Column="0"
+                            Command="{x:Static materialDesign:DialogHost.OpenDialogCommand}">
+                            <materialDesign:PackIcon Kind="Plus" Style="{StaticResource LightAccentButtonIcon}" />
+                        </Button>
+                    </Grid>
+                </GroupBox>
+            </materialDesign:DialogHost>
+            <!--#endregion-->
+
+            <DockPanel Grid.Row="3" Grid.Column="1">
+                <Button
+                    x:Name="cancelButton"
+                    Click="cancelButton_Click"
+                    Content="USE BLANK"
+                    DockPanel.Dock="Left"
+                    Style="{DynamicResource MaterialDesignFlatButton}" />
+                <Button
+                    x:Name="okButton"
+                    HorizontalAlignment="Right"
+                    Click="okButton_Click"
+                    Content="ACCEPT"
+                    DockPanel.Dock="Right" />
+            </DockPanel>
+
+        </Grid>
+    </ScrollViewer>
+</Window>
