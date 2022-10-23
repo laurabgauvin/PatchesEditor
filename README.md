@@ -1,6 +1,8 @@
 # Patches Editor
 This program was written for a specific work environment. All references to that company have been removed from the UI and from the code. In addition, some functionality has been removed from the original program for simplicity and/or privacy reasons.
 
+*Note: this program was meant to be used as an internal program within the QA department of a specific company. As such, the UI is quite minimal and simple, since it was not meant to be used by external users that would be unfamiliar with its purpose or process.*
+
 Its purpose is twofold:
 1. To make it easier and faster to write and export patch notes using the specific format used by the company for which this was written. Examples of rules:
    - Lines in the exported patch notes can have a maximum of 100 characters, so this program allows the user to type the patch notes text without having to worry about making/updating line breaks every 100 characters and will instead do them automatically once the patch notes are exported.
@@ -101,4 +103,13 @@ This is an overview of the process to export patch notes when merging patch note
 7. The user clicks 'Export All'.
 8. The Patches Editor asks the user to select the folder where the final programs are located (folder from step 6).
 9. The Patches Editor goes through each program being patched out in each patch notes and performs the merge.
+   - First, it creates a dictionary that has each program being patched out as the key and the list of patches containing this program as the value (ordered by ticket #).
+   - Then, for each of those key-value pairs, it creates the merged patch text:
+     - The date is set to the current day.
+     - The list of programmers, testers and tickets are added together from all patches.
+     - Each of the backgrounds are marked with the 'short description' and added in order.
+     - The impact and dependencies are merged together if they are all the same. If they are different, they are marked with the 'short description' for each patch.
+     - Each of the description of changes are marked with the 'short description' and added in order.
+     - The instructions are re-generated using the list of all programs from all patch notes together.
+     - The list of programs used contains all of the programs from all patch notes together.
 10. The Patches Editor generates patch notes for each program being patched out and either creates a .txt file for that program (if none exist), or edits the existing document by adding the new patch notes to the top.
